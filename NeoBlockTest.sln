@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetBlockData", "GetBlockData\GetBlockData.csproj", "{67ADDE2A-AED8-4804-AA88-7E8DB8C108F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockParser", "BlockParser\BlockParser.csproj", "{A9F94A17-FD55-43CE-B75D-64C8C85451A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67ADDE2A-AED8-4804-AA88-7E8DB8C108F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67ADDE2A-AED8-4804-AA88-7E8DB8C108F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67ADDE2A-AED8-4804-AA88-7E8DB8C108F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67ADDE2A-AED8-4804-AA88-7E8DB8C108F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F94A17-FD55-43CE-B75D-64C8C85451A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F94A17-FD55-43CE-B75D-64C8C85451A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F94A17-FD55-43CE-B75D-64C8C85451A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F94A17-FD55-43CE-B75D-64C8C85451A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41402500-F23F-4F59-A6E9-3836C4413FD8}
+	EndGlobalSection
+EndGlobal

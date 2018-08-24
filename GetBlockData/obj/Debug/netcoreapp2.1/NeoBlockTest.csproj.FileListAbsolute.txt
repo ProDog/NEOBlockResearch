@@ -1,0 +1,11 @@
+E:\VSProject\NeoBlockTest\NeoBlockTest\bin\Debug\netcoreapp2.1\NeoBlockTest.deps.json
+E:\VSProject\NeoBlockTest\NeoBlockTest\bin\Debug\netcoreapp2.1\NeoBlockTest.runtimeconfig.json
+E:\VSProject\NeoBlockTest\NeoBlockTest\bin\Debug\netcoreapp2.1\NeoBlockTest.runtimeconfig.dev.json
+E:\VSProject\NeoBlockTest\NeoBlockTest\bin\Debug\netcoreapp2.1\NeoBlockTest.dll
+E:\VSProject\NeoBlockTest\NeoBlockTest\obj\Debug\netcoreapp2.1\NeoBlockTest.csprojAssemblyReference.cache
+E:\VSProject\NeoBlockTest\NeoBlockTest\obj\Debug\netcoreapp2.1\NeoBlockTest.csproj.CoreCompileInputs.cache
+E:\VSProject\NeoBlockTest\NeoBlockTest\obj\Debug\netcoreapp2.1\NeoBlockTest.AssemblyInfoInputs.cache
+E:\VSProject\NeoBlockTest\NeoBlockTest\obj\Debug\netcoreapp2.1\NeoBlockTest.AssemblyInfo.cs
+E:\VSProject\NeoBlockTest\NeoBlockTest\bin\Debug\netcoreapp2.1\NeoBlockTest.pdb
+E:\VSProject\NeoBlockTest\NeoBlockTest\obj\Debug\netcoreapp2.1\NeoBlockTest.dll
+E:\VSProject\NeoBlockTest\NeoBlockTest\obj\Debug\netcoreapp2.1\NeoBlockTest.pdb
