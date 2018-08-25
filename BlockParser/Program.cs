@@ -21,37 +21,93 @@ namespace BlockParser
         static void Main(string[] args)
         {
             Console.WriteLine("Start!");
-            var parserHeightFile = path + Path.DirectorySeparatorChar + "ParserHeight.txt";
-            var blockIndex = 0;
-            if (File.Exists(parserHeightFile))
+            string text = path + Path.DirectorySeparatorChar.ToString() + "ParserHeight.txt";
+            int num = 0;
+            if (File.Exists(path + Path.DirectorySeparatorChar.ToString() + "AllTrans.txt"))
             {
-                blockIndex = int.Parse(File.ReadAllText(path + Path.DirectorySeparatorChar + "ParserHeight.txt"));
+                allTrans = JsonConvert.DeserializeObject<Dictionary<string, TX>>(File.ReadAllText(path + Path.DirectorySeparatorChar.ToString() + "AllTrans.txt"));
             }
-
-            for (;; blockIndex++)
+            if (File.Exists(path + Path.DirectorySeparatorChar.ToString() + "AllAddrs.txt"))
             {
-                var file = path + blockIndex.ToString("D08") + ".txt";
-                if (!File.Exists(file))
+                allAddrs = JsonConvert.DeserializeObject<Dictionary<string, UserAddr>>(File.ReadAllText(path + Path.DirectorySeparatorChar.ToString() + "AllAddrs.txt"));
+            }
+            if (File.Exists(text))
+            {
+                num = int.Parse(File.ReadAllText(path + Path.DirectorySeparatorChar.ToString() + "ParserHeight.txt"));
+            }
+            while (true)
+            {
+                string text2 = path + num.ToString("D08") + ".txt";
+                if (!File.Exists(text2))
                 {
-                    File.WriteAllText(path + Path.DirectorySeparatorChar + "ParserHeight.txt", blockIndex.ToString(),
-                        Encoding.UTF8);
                     break;
                 }
-
-                var txt = File.ReadAllText(file, Encoding.UTF8);
-                var json = JObject.Parse(txt);
+                if (num % 1000 == 0)
+                {
+                    Console.WriteLine("height = " + num);
+                }
+                string text3 = File.ReadAllText(text2, Encoding.UTF8);
+                JObject json = JObject.Parse(text3);
                 ParserJson(json);
+                num++;
             }
-
-            Console.WriteLine("count = " + blockIndex);
-
-            ShowResult();
-            string traresult = JsonConvert.SerializeObject(allTrans);
-            File.WriteAllText(path + "AllTrans.txt", traresult, Encoding.UTF8);
-            string addresult = JsonConvert.SerializeObject(allAddrs);
-            File.WriteAllText(path + "AllAddrs.txt", addresult, Encoding.UTF8);
-            Console.WriteLine("end..");
+            File.WriteAllText(path + Path.DirectorySeparatorChar.ToString() + "ParserHeight.txt", num.ToString(), Encoding.UTF8);
+            Console.WriteLine("Block Height = " + num);
+            string contents = JsonConvert.SerializeObject((object)allTrans);
+            File.WriteAllText(path + "AllTrans.txt", contents, Encoding.UTF8);
+            string contents2 = JsonConvert.SerializeObject((object)allAddrs);
+            File.WriteAllText(path + "AllAddrs.txt", contents2, Encoding.UTF8);
+            Console.WriteLine("Sync Over.");
+            GetAddressAeest();
             Console.ReadKey();
+        }
+
+        private static void GetAddressAeest()
+        {
+            while (true)
+            {
+                Console.WriteLine("Please Input Your Address:");
+                string text = Console.ReadLine();
+                Console.WriteLine("address = " + text);
+                Dictionary<string, decimal> coins = new Dictionary<string, decimal>();
+                if (!allAddrs.ContainsKey(text))
+                {
+                    Console.WriteLine("Not exists this address!");
+                    continue;
+                }
+                
+                    foreach (string utxo in allAddrs[text].utxos)
+                    {
+                        string[] array = utxo.Split('_');
+                        string key = array[0];
+                        int num = int.Parse(array[1]);
+                        VOUT coin = allTrans[key].vout[num];
+                        if (!coins.ContainsKey(coin.asset))
+                        {
+                            coins[coin.asset] = decimal.Zero;
+                        }
+
+                        coins[coin.asset] += coin.value;
+                    }
+                    if (coins.Count == 0)
+                    {
+                        Console.WriteLine("No Coin");
+                    }
+                    foreach (KeyValuePair<string, decimal> item in coins)
+                    {
+                        string text2 = item.Key;
+                        if (text2 == neo)
+                        {
+                            text2 = "<NEO>";
+                        }
+                        if (text2 == gas)
+                        {
+                            text2 = "<GAS>";
+                        }
+                        Console.WriteLine(text2 + " = " + item.Value);
+                    }
+                
+            }
         }
 
         static void ParserJson(JObject json)
@@ -78,7 +134,7 @@ namespace BlockParser
                 {
                     objtx.vout[i] = new VOUT();
                     objtx.vout[i].n = (int) vout[i]["n"];
-                    objtx.vout[i].value = System.Numerics.BigInteger.Parse((string) vout[i]["value"]);
+                    objtx.vout[i].value = (decimal)vout[i]["value"];
                     objtx.vout[i].address = (string) vout[i]["address"];
                     objtx.vout[i].asset = (string) vout[i]["asset"];
                 }
@@ -109,7 +165,6 @@ namespace BlockParser
                 var utxoid = tx.txid + "_" + i;
                 allAddrs[vout.address].utxos.Add(utxoid);//将vout的utxo增加到每个地址
             }
-
             
         }
 
@@ -119,7 +174,7 @@ namespace BlockParser
             foreach (var addr in allAddrs)
             {
                 Console.WriteLine("address = " + addr.Key);
-                Dictionary<string, System.Numerics.BigInteger> coins = new Dictionary<string, BigInteger>();
+                Dictionary<string, decimal> coins = new Dictionary<string, decimal>();
 
                 foreach (var utxo in addr.Value.utxos)
                 {
@@ -131,7 +186,6 @@ namespace BlockParser
                     {
                         coins[coin.asset] = 0;
                     }
-
                     coins[coin.asset] += coin.value;
                 }
 
@@ -168,7 +222,7 @@ namespace BlockParser
     {
         public int n;
         public string asset;
-        public System.Numerics.BigInteger value;
+        public decimal value;
         public string address;
     }
 

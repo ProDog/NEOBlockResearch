@@ -35,7 +35,7 @@ namespace GetBlockData
 
             var height = GetHeight();
             var localheight = Directory.GetFiles("E:\\TestNetData\\").Length;
-            for (int i = localheight-2; i < height; i++)
+            for (int i = localheight; i < height; i++)
             {
                 var blockdata = GetBlock(i);
                 var path = folder + Path.DirectorySeparatorChar + i.ToString("D08") + ".txt";
