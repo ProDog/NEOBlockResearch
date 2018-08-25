@@ -27,20 +27,20 @@ namespace GetBlockData
 
         private static void DumpBlock()
         {
-            var folder = "blockdata";
+            var folder = "E:\\TestNetData\\";
             if (!Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
 
             var height = GetHeight();
-
-            for (int i = 0; i < height; i++)
+            var localheight = Directory.GetFiles("E:\\TestNetData\\").Length;
+            for (int i = localheight-2; i < height; i++)
             {
                 var blockdata = GetBlock(i);
                 var path = folder + Path.DirectorySeparatorChar + i.ToString("D08") + ".txt";
                 File.Delete(path);
-                File.WriteAllText(path,blockdata,Encoding.UTF8);
+                File.WriteAllText(path, blockdata, Encoding.UTF8);
                 if (i % 1000 == 0)
                 {
                     Console.WriteLine("height = " + i);

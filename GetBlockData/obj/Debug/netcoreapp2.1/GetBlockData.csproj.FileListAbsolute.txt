@@ -20,3 +20,14 @@ E:\VSProject\NeoBlockTest\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.Asse
 E:\VSProject\NeoBlockTest\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.AssemblyInfo.cs
 E:\VSProject\NeoBlockTest\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.dll
 E:\VSProject\NeoBlockTest\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.pdb
+E:\VSProject\NEOSpider\GetBlockData\bin\Debug\netcoreapp2.1\GetBlockData.deps.json
+E:\VSProject\NEOSpider\GetBlockData\bin\Debug\netcoreapp2.1\GetBlockData.runtimeconfig.json
+E:\VSProject\NEOSpider\GetBlockData\bin\Debug\netcoreapp2.1\GetBlockData.runtimeconfig.dev.json
+E:\VSProject\NEOSpider\GetBlockData\bin\Debug\netcoreapp2.1\GetBlockData.dll
+E:\VSProject\NEOSpider\GetBlockData\bin\Debug\netcoreapp2.1\GetBlockData.pdb
+E:\VSProject\NEOSpider\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.csprojAssemblyReference.cache
+E:\VSProject\NEOSpider\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.csproj.CoreCompileInputs.cache
+E:\VSProject\NEOSpider\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.AssemblyInfoInputs.cache
+E:\VSProject\NEOSpider\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.AssemblyInfo.cs
+E:\VSProject\NEOSpider\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.dll
+E:\VSProject\NEOSpider\GetBlockData\obj\Debug\netcoreapp2.1\GetBlockData.pdb

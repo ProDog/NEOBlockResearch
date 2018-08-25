@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using System.Text;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace BlockParser
@@ -15,16 +16,25 @@ namespace BlockParser
         private static Dictionary<string, TX> allTrans = new Dictionary<string, TX>();
         private static Dictionary<string, UserAddr> allAddrs = new Dictionary<string, UserAddr>();
 
+        private static string path = "E:\\TestNetData\\";
+
         static void Main(string[] args)
         {
             Console.WriteLine("Start!");
+            var parserHeightFile = path + Path.DirectorySeparatorChar + "ParserHeight.txt";
+            var blockIndex = 0;
+            if (File.Exists(parserHeightFile))
+            {
+                blockIndex = int.Parse(File.ReadAllText(path + Path.DirectorySeparatorChar + "ParserHeight.txt"));
+            }
 
-            int blockIndex = 0;
             for (;; blockIndex++)
             {
-                var file = "blockdata\\" + blockIndex.ToString("D08") + ".txt";
+                var file = path + blockIndex.ToString("D08") + ".txt";
                 if (!File.Exists(file))
                 {
+                    File.WriteAllText(path + Path.DirectorySeparatorChar + "ParserHeight.txt", blockIndex.ToString(),
+                        Encoding.UTF8);
                     break;
                 }
 
@@ -36,6 +46,11 @@ namespace BlockParser
             Console.WriteLine("count = " + blockIndex);
 
             ShowResult();
+            string traresult = JsonConvert.SerializeObject(allTrans);
+            File.WriteAllText(path + "AllTrans.txt", traresult, Encoding.UTF8);
+            string addresult = JsonConvert.SerializeObject(allAddrs);
+            File.WriteAllText(path + "AllAddrs.txt", addresult, Encoding.UTF8);
+            Console.WriteLine("end..");
             Console.ReadKey();
         }
 
@@ -71,6 +86,7 @@ namespace BlockParser
                 allTrans[objtx.txid] = objtx;
                 ParseObjTx(objtx);
             }
+            
         }
 
         static void ParseObjTx(TX tx)
@@ -91,8 +107,10 @@ namespace BlockParser
                     allAddrs[vout.address] = new UserAddr();
                 }
                 var utxoid = tx.txid + "_" + i;
-                allAddrs[vout.address].utxos.Add(utxoid);//讲vout的utxo增加到每个地址
+                allAddrs[vout.address].utxos.Add(utxoid);//将vout的utxo增加到每个地址
             }
+
+            
         }
 
         static void ShowResult()

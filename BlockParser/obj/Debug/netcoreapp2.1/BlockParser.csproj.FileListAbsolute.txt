@@ -9,3 +9,14 @@ E:\VSProject\NeoBlockTest\BlockParser\bin\Debug\netcoreapp2.1\BlockParser.pdb
 E:\VSProject\NeoBlockTest\BlockParser\obj\Debug\netcoreapp2.1\BlockParser.csprojAssemblyReference.cache
 E:\VSProject\NeoBlockTest\BlockParser\obj\Debug\netcoreapp2.1\BlockParser.dll
 E:\VSProject\NeoBlockTest\BlockParser\obj\Debug\netcoreapp2.1\BlockParser.pdb
+E:\VSProject\NEOSpider\BlockParser\bin\Debug\netcoreapp2.1\BlockParser.deps.json
+E:\VSProject\NEOSpider\BlockParser\bin\Debug\netcoreapp2.1\BlockParser.runtimeconfig.json
+E:\VSProject\NEOSpider\BlockParser\bin\Debug\netcoreapp2.1\BlockParser.runtimeconfig.dev.json
+E:\VSProject\NEOSpider\BlockParser\bin\Debug\netcoreapp2.1\BlockParser.dll
+E:\VSProject\NEOSpider\BlockParser\bin\Debug\netcoreapp2.1\BlockParser.pdb
+E:\VSProject\NEOSpider\BlockParser\obj\Debug\netcoreapp2.1\BlockParser.csprojAssemblyReference.cache
+E:\VSProject\NEOSpider\BlockParser\obj\Debug\netcoreapp2.1\BlockParser.csproj.CoreCompileInputs.cache
+E:\VSProject\NEOSpider\BlockParser\obj\Debug\netcoreapp2.1\BlockParser.AssemblyInfoInputs.cache
+E:\VSProject\NEOSpider\BlockParser\obj\Debug\netcoreapp2.1\BlockParser.AssemblyInfo.cs
+E:\VSProject\NEOSpider\BlockParser\obj\Debug\netcoreapp2.1\BlockParser.dll
+E:\VSProject\NEOSpider\BlockParser\obj\Debug\netcoreapp2.1\BlockParser.pdb
