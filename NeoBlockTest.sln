@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GetBlockData", "GetBlockDat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockParser", "BlockParser\BlockParser.csproj", "{A9F94A17-FD55-43CE-B75D-64C8C85451A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferTest", "TransferTest\TransferTest.csproj", "{D546AD4A-7AE9-4B67-B313-800D2A95CEFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransferTest", "TransferTest\TransferTest.csproj", "{D546AD4A-7AE9-4B67-B313-800D2A95CEFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartContractDemo", "SmartContractDemo\SmartContractDemo.csproj", "{864C7F8E-4EFD-4376-B934-49FA3C7535C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D546AD4A-7AE9-4B67-B313-800D2A95CEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D546AD4A-7AE9-4B67-B313-800D2A95CEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D546AD4A-7AE9-4B67-B313-800D2A95CEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{864C7F8E-4EFD-4376-B934-49FA3C7535C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{864C7F8E-4EFD-4376-B934-49FA3C7535C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{864C7F8E-4EFD-4376-B934-49FA3C7535C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{864C7F8E-4EFD-4376-B934-49FA3C7535C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

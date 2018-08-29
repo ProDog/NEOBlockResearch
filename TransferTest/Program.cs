@@ -14,8 +14,9 @@ namespace TransferTest
         static void Main(string[] args)
         {
             Console.WriteLine("Open Account:");
-            //这是一个空密钥、使用时填自己的WIF
-            var wif = "Kwky7bJRLzNzKbq2ZBFZp68pwhz2QKsG6HYamDGBSxKmGftw7YiQ";
+            //使用时填自己的WIF
+            Console.WriteLine("Input your wif:");
+            var wif = Console.ReadLine();
             
             byte[] prikey = Helper.GetPrivateKeyFromWIF(wif);
             byte[] pubkey = NeoHelper.GetPublicKeyFromPrivateKey(prikey);
