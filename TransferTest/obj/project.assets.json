@@ -725,11 +725,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\VSProject\\NEOSpider\\TransferTest\\TransferTest.csproj",
+      "projectUniqueName": "E:\\NEO_ex\\NEOSpider\\TransferTest\\TransferTest.csproj",
       "projectName": "TransferTest",
-      "projectPath": "E:\\VSProject\\NEOSpider\\TransferTest\\TransferTest.csproj",
+      "projectPath": "E:\\NEO_ex\\NEOSpider\\TransferTest\\TransferTest.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\VSProject\\NEOSpider\\TransferTest\\obj\\",
+      "outputPath": "E:\\NEO_ex\\NEOSpider\\TransferTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -13,12 +13,12 @@ namespace SmartContractDemo
             Console.WriteLine("Please input your wif:");
             var wif = Console.ReadLine();
 
-            PubScDemoAsync(wif);
+            PubScDemo(wif);
 
             
         }
 
-        private static async void PubScDemoAsync(string wif)
+        private static async void PubScDemo(string wif)
         {
             string assetid = "0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7";
             string api = "https://api.nel.group/api/testnet";
@@ -161,5 +161,7 @@ namespace SmartContractDemo
 
             return tran;
         }
+
+
     }
 }

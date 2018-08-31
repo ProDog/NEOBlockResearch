@@ -725,11 +725,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\VSProject\\NEOSpider\\SmartContractDemo\\SmartContractDemo.csproj",
+      "projectUniqueName": "E:\\NEO_ex\\NEOSpider\\SmartContractDemo\\SmartContractDemo.csproj",
       "projectName": "SmartContractDemo",
-      "projectPath": "E:\\VSProject\\NEOSpider\\SmartContractDemo\\SmartContractDemo.csproj",
+      "projectPath": "E:\\NEO_ex\\NEOSpider\\SmartContractDemo\\SmartContractDemo.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\VSProject\\NEOSpider\\SmartContractDemo\\obj\\",
+      "outputPath": "E:\\NEO_ex\\NEOSpider\\SmartContractDemo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

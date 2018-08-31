@@ -725,11 +725,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\VSProject\\NEOSpider\\BlockParser\\BlockParser.csproj",
+      "projectUniqueName": "E:\\NEO_ex\\NEOSpider\\BlockParser\\BlockParser.csproj",
       "projectName": "BlockParser",
-      "projectPath": "E:\\VSProject\\NEOSpider\\BlockParser\\BlockParser.csproj",
+      "projectPath": "E:\\NEO_ex\\NEOSpider\\BlockParser\\BlockParser.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\VSProject\\NEOSpider\\BlockParser\\obj\\",
+      "outputPath": "E:\\NEO_ex\\NEOSpider\\BlockParser\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
