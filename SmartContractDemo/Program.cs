@@ -22,8 +22,6 @@ namespace SmartContractDemo
 
         private static void PubScDemo(string wif)
         {
-
-            //Kz598SBzExgQL7z8iWe5V9H7JibibQi2vLVs1PjtqrZGkBZnxoJy
             string assetid = "0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7";
             string api = "https://api.nel.group/api/testnet";
             byte[] prikey = ThinNeo.Helper.GetPrivateKeyFromWIF(wif);
