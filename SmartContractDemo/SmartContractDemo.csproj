@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,10 +11,10 @@
 
   <ItemGroup>
     <Reference Include="thinSDK">
-      <HintPath>..\..\examples-transaction\thinSDK\bin\Debug\netcoreapp2.0\thinSDK.dll</HintPath>
+      <HintPath>..\..\..\NEL\neo-thinsdk-cs\thinSDK\bin\Debug\netcoreapp2.0\thinSDK.dll</HintPath>
     </Reference>
     <Reference Include="thinSDK_neo">
-      <HintPath>..\..\examples-transaction\thinSDK_neo\bin\Debug\net47\thinSDK_neo.dll</HintPath>
+      <HintPath>..\..\neo-thinsdk-cs\thinSDK_neo\bin\Debug\netcoreapp2.0\thinSDK_neo.dll</HintPath>
     </Reference>
   </ItemGroup>
 

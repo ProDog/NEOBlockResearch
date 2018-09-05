@@ -725,11 +725,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\NEO_ex\\NEOSpider\\GetBlockData\\GetBlockData.csproj",
+      "projectUniqueName": "E:\\NEO_Test\\NEO-Test\\GetBlockData\\GetBlockData.csproj",
       "projectName": "GetBlockData",
-      "projectPath": "E:\\NEO_ex\\NEOSpider\\GetBlockData\\GetBlockData.csproj",
+      "projectPath": "E:\\NEO_Test\\NEO-Test\\GetBlockData\\GetBlockData.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\NEO_ex\\NEOSpider\\GetBlockData\\obj\\",
+      "outputPath": "E:\\NEO_Test\\NEO-Test\\GetBlockData\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

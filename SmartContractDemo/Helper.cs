@@ -6,34 +6,28 @@ using System.Threading.Tasks;
 
 namespace SmartContractDemo
 {
+    public class Utxo
+    {
+        //txid[n] 是utxo的属性
+        public ThinNeo.Hash256 txid;
+        public int n;
+
+        //asset资产、addr 属于谁，value数额，这都是查出来的
+        public string addr;
+        public string asset;
+        public decimal value;
+        public Utxo(string _addr, ThinNeo.Hash256 _txid, string _asset, decimal _value, int _n)
+        {
+            this.addr = _addr;
+            this.txid = _txid;
+            this.asset = _asset;
+            this.value = _value;
+            this.n = _n;
+        }
+    }
+
     public class Helper
     {
-        public static string MakeRpcUrlPost(string url, string method, out byte[] data, params MyJson.IJsonNode[] _params)
-        {
-            //if (url.Last() != '/')
-            //    url = url + "/";
-            var json = new MyJson.JsonNode_Object();
-            json["id"] = new MyJson.JsonNode_ValueNumber(1);
-            json["jsonrpc"] = new MyJson.JsonNode_ValueString("2.0");
-            json["method"] = new MyJson.JsonNode_ValueString(method);
-            StringBuilder sb = new StringBuilder();
-            var array = new MyJson.JsonNode_Array();
-            for (var i = 0; i < _params.Length; i++)
-            {
-
-                array.Add(_params[i]);
-            }
-            json["params"] = array;
-            data = System.Text.Encoding.UTF8.GetBytes(json.ToString());
-            return url;
-        }
-
-        public static async Task<string> HttpPost(string url, byte[] data)
-        {
-            WebClient wc = new WebClient();
-            wc.Headers["content-type"] = "text/plain;charset=UTF-8";
-            byte[] retdata = await wc.UploadDataTaskAsync(url, "POST", data);
-            return System.Text.Encoding.UTF8.GetString(retdata);
-        }
+        
     }
 }
