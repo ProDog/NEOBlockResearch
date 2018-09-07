@@ -15,7 +15,7 @@ namespace SmartContractDemo
             Console.WriteLine("NEO SmartContract Test!");
             Console.WriteLine("Please input your wif:");
             var wif = Console.ReadLine();
-
+            //var aa=Encoding.Default.GetBytes("AbN2K2trYzgx8WMg2H7U7JHH6RQVzz2fnx");
             PubScDemo(wif);
 
         }
@@ -31,15 +31,15 @@ namespace SmartContractDemo
             Dictionary<string, List<Utxo>> dir = GetBalanceByAddress(api, address);
 
             //从文件中读取合约脚本
-            byte[] script = System.IO.File.ReadAllBytes("NeoContracts.avm"); //这里填你的合约所在地址
+            byte[] script = System.IO.File.ReadAllBytes("dapp_nnc4.0.avm"); //这里填你的合约所在地址
             Console.WriteLine("合约脚本:" + ThinNeo.Helper.Bytes2HexString(script));
             Console.WriteLine("合约脚本hash：" + ThinNeo.Helper.Bytes2HexString(ThinNeo.Helper.GetScriptHashFromScript(script).data.ToArray().Reverse().ToArray()));
             byte[] parameter__list = ThinNeo.Helper.HexString2Bytes("0710");  //这里填合约入参  例：0610代表（string，[]）
             byte[] return_type = ThinNeo.Helper.HexString2Bytes("05");  //这里填合约的出参
-            int need_storage = 0;
-            int need_nep4 = 0;
-            int need_canCharge = 0;
-            string name = "tgas";
+            int need_storage = 1;
+            int need_nep4 = 2;
+            int need_canCharge = 4;
+            string name = "XC";
             string version = "1.0";
             string auther = "Zhang";
             string email = "0";
@@ -72,7 +72,7 @@ namespace SmartContractDemo
                 extdata.script = sb.ToArray();
 
                 //Console.WriteLine(ThinNeo.Helper.Bytes2HexString(extdata.script));
-                extdata.gas = Math.Ceiling(gas_consumed > 10 ? gas_consumed - 10 : gas_consumed);
+                extdata.gas = Math.Ceiling(gas_consumed - 10);
 
                 //拼装交易体
                 ThinNeo.Transaction tran = MakeTran(dir, null, new ThinNeo.Hash256(assetid), extdata.gas);

@@ -25,15 +25,77 @@ namespace TransferTest
             var targetAddr = "AGcnXDr6AxqtmVEK7vQZMbhLSRJaW7bZ8c";
             decimal sendCount = 2;
 
-            TransNEO(address, prikey, pubkey, targetAddr, sendCount);
+            //TransNEO(address, prikey, pubkey, targetAddr, sendCount);
 
-            TransNNC(address, prikey, pubkey, targetAddr, sendCount);
+            //TransNNC(address, prikey, pubkey, targetAddr, sendCount);
 
-            GetBalanceOfNNC(address);
+            //GetBalanceOfNNC(address);
+
+            TransGasForNep5(address, prikey, pubkey, targetAddr, sendCount);
 
             Console.ReadKey();
         }
 
+        private static async void TransGasForNep5(string address, byte[] prikey, byte[] pubkey, string targetAddr,
+            decimal sendCount)
+        {
+            var assetnep5 = "0xa0b53d2efa8b1c4a62fcc1fcb54b7641510810c7";
+            var assetgas = "0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7";
+            string api = "https://api.nel.group/api/testnet";
+
+            Dictionary<string, List<Utxo>> dir = await GetBalanceByAddress(api, address);
+            ThinNeo.Transaction tran = null;
+            {
+                byte[] script = null;
+                using (var sb = new ThinNeo.ScriptBuilder())
+                {
+                    var array = new MyJson.JsonNode_Array();
+                    sb.EmitParamJson(array); //参数倒序入
+                    sb.EmitParamJson(new MyJson.JsonNode_ValueString("(str)mintTokens")); //参数倒序入
+                    ThinNeo.Hash160 shash = new ThinNeo.Hash160(assetnep5);
+                    sb.EmitAppCall(shash); //nep5脚本
+                    script = sb.ToArray();
+                }
+
+                var nep5scripthash = new ThinNeo.Hash160(assetnep5);
+                var targetaddr = ThinNeo.Helper.GetAddressFromScriptHash(nep5scripthash);
+                Console.WriteLine("contract address=" + targetaddr); //往合约地址转账
+
+                //生成交易
+                tran = makeTran(dir[assetgas], targetaddr, new ThinNeo.Hash256(assetgas), 5);
+                tran.type = ThinNeo.TransactionType.InvocationTransaction;
+                var idata = new ThinNeo.InvokeTransData();
+                tran.extdata = idata;
+                idata.script = script;
+            }
+
+            //sign and broadcast
+            var signdata = ThinNeo.Helper.Sign(tran.GetMessage(), prikey);
+            tran.AddWitness(signdata, pubkey, address);
+            var trandata = tran.GetRawData();
+            var strtrandata = ThinNeo.Helper.Bytes2HexString(trandata);
+            byte[] postdata;
+            var url = HttpHelper.MakeRpcUrlPost(api, "sendrawtransaction", out postdata, new MyJson.JsonNode_ValueString(strtrandata));
+            var result = await HttpHelper.HttpPost(url, postdata);
+            Console.WriteLine("得到的结果是：" + result);
+            var json = MyJson.Parse(result).AsDict();
+            if (json.ContainsKey("result"))
+            {
+                var resultv = json["result"].AsList()[0].AsDict();
+                var txid = resultv["txid"].AsString();
+                if (txid.Length > 0)
+                {
+                    Hash256 test = tran.GetHash();
+                }
+
+                Console.WriteLine("txid=" + txid);
+            }
+        }
+
+        /// <summary>
+        /// 调用合约中的balanceOf方法、
+        /// </summary>
+        /// <param name="address"></param>
         private static async void GetBalanceOfNNC(string address)
         {
             byte[] data = null;
@@ -43,7 +105,7 @@ namespace TransferTest
                 array.AddArrayValue("(addr)" + address);
                 sb.EmitParamJson(array);
                 sb.EmitPushString("balanceOf");
-                sb.EmitAppCall(new Hash160("0xbab964febd82c9629cc583596975f51811f25f47"));
+                sb.EmitAppCall(new Hash160("0xa0b53d2efa8b1c4a62fcc1fcb54b7641510810c7"));//合约脚本hash
                 data = sb.ToArray();
             }
 
@@ -54,6 +116,8 @@ namespace TransferTest
             var result = await HttpHelper.HttpPost(url, postdata);
             Console.WriteLine(result);
         }
+
+
 
         private static async void TransNEO(string address, byte[] prikey, byte[] pubkey, string targetAddr,decimal sendCount)
         {
@@ -217,5 +281,96 @@ namespace TransferTest
             return dic;
         }
 
+
+        public static Transaction makeTran(List<Utxo> utxos, string targetaddr, ThinNeo.Hash256 assetid, decimal sendcount)
+        {
+            var tran = new ThinNeo.Transaction();
+            tran.type = ThinNeo.TransactionType.ContractTransaction;
+            tran.version = 0;//0 or 1
+            tran.extdata = null;
+
+            tran.attributes = new ThinNeo.Attribute[0];
+            var scraddr = "";
+            utxos.Sort((a, b) =>
+            {
+                if (a.value > b.value)
+                    return 1;
+                else if (a.value < b.value)
+                    return -1;
+                else
+                    return 0;
+            });
+            decimal count = decimal.Zero;
+            List<ThinNeo.TransactionInput> list_inputs = new List<ThinNeo.TransactionInput>();
+            for (var i = 0; i < utxos.Count; i++)
+            {
+                ThinNeo.TransactionInput input = new ThinNeo.TransactionInput();
+                input.hash = utxos[i].txid;
+                input.index = (ushort)utxos[i].n;
+                list_inputs.Add(input);
+                count += utxos[i].value;
+                scraddr = utxos[i].addr;
+                if (count >= sendcount)
+                {
+                    break;
+                }
+            }
+            tran.inputs = list_inputs.ToArray();
+            if (count >= sendcount)//输入大于等于输出
+            {
+                List<ThinNeo.TransactionOutput> list_outputs = new List<ThinNeo.TransactionOutput>();
+                //输出
+                if (sendcount > decimal.Zero && targetaddr != null)
+                {
+                    ThinNeo.TransactionOutput output = new ThinNeo.TransactionOutput();
+                    output.assetId = assetid;
+                    output.value = sendcount;
+                    output.toAddress = ThinNeo.Helper.GetPublicKeyHashFromAddress(targetaddr);
+                    list_outputs.Add(output);
+                }
+
+                //找零
+                var change = count - sendcount;
+                if (change > decimal.Zero)
+                {
+                    ThinNeo.TransactionOutput outputchange = new ThinNeo.TransactionOutput();
+                    outputchange.toAddress = ThinNeo.Helper.GetPublicKeyHashFromAddress(scraddr);
+                    outputchange.value = change;
+                    outputchange.assetId = assetid;
+                    list_outputs.Add(outputchange);
+
+                }
+                tran.outputs = list_outputs.ToArray();
+            }
+            else
+            {
+                throw new Exception("no enough money.");
+            }
+            return tran;
+        }
+
+        //获取地址的utxo来得出地址的资产  
+        public static async Task<Dictionary<string, List<Utxo>>> GetBalanceByAddress(string api, string _addr)
+        {
+            MyJson.JsonNode_Object response = (MyJson.JsonNode_Object)MyJson.Parse(await HttpHelper.HttpGet(api + "?method=getutxo&id=1&params=['" + _addr + "']"));
+            MyJson.JsonNode_Array resJA = (MyJson.JsonNode_Array)response["result"];
+            Dictionary<string, List<Utxo>> _dir = new Dictionary<string, List<Utxo>>();
+            foreach (MyJson.JsonNode_Object j in resJA)
+            {
+                Utxo utxo = new Utxo(j["addr"].ToString(), new ThinNeo.Hash256(j["txid"].ToString()), j["asset"].ToString(), decimal.Parse(j["value"].ToString()), int.Parse(j["n"].ToString()));
+                if (_dir.ContainsKey(j["asset"].ToString()))
+                {
+                    _dir[j["asset"].ToString()].Add(utxo);
+                }
+                else
+                {
+                    List<Utxo> l = new List<Utxo>();
+                    l.Add(utxo);
+                    _dir[j["asset"].ToString()] = l;
+                }
+
+            }
+            return _dir;
+        }
     }
 }
