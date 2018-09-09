@@ -75,7 +75,7 @@ namespace TransferTest
             var trandata = tran.GetRawData();
             var strtrandata = ThinNeo.Helper.Bytes2HexString(trandata);
             byte[] postdata;
-            var url = HttpHelper.MakeRpcUrlPost(api, "sendrawtransaction", out postdata, new MyJson.JsonNode_ValueString(strtrandata));
+            var url = HttpHelper.MakeRpcUrlPost("http://127.0.0.1:20332", "sendrawtransaction", out postdata, new MyJson.JsonNode_ValueString(strtrandata));
             var result = await HttpHelper.HttpPost(url, postdata);
             Console.WriteLine("得到的结果是：" + result);
             var json = MyJson.Parse(result).AsDict();
@@ -139,7 +139,7 @@ namespace TransferTest
 
             byte[] postdata;
 
-            var url = HttpHelper.MakeRpcUrlPost("https://api.nel.group/api/testnet", "sendrawtransaction", out postdata,
+            var url = HttpHelper.MakeRpcUrlPost("http://127.0.0.1:20332", "sendrawtransaction", out postdata,
                 new MyJson.JsonNode_ValueString(rawdata));
             var result = await HttpHelper.HttpPost(url, postdata);
             MyJson.JsonNode_Object resJO = (MyJson.JsonNode_Object) MyJson.Parse(result);
@@ -183,7 +183,7 @@ namespace TransferTest
             string rawdata = ThinNeo.Helper.Bytes2HexString(data);
 
             byte[] postdata;
-            var url = HttpHelper.MakeRpcUrlPost("https://api.nel.group/api/testnet", "sendrawtransaction", out postdata,
+            var url = HttpHelper.MakeRpcUrlPost("http://127.0.0.1:20332", "sendrawtransaction", out postdata,
                 new MyJson.JsonNode_ValueString(rawdata));
             var result = await HttpHelper.HttpPost(url, postdata);
             MyJson.JsonNode_Object resJO = (MyJson.JsonNode_Object) MyJson.Parse(result);
